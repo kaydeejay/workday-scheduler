@@ -11,19 +11,24 @@
 */
 
 $(document).ready(function(){
-
+    // set colors once per minute
     var colorTimer;
 
     $("#currentDay").text(moment());
 
     function setColors(){
-        var actualTime = moment().hour();
+        // var actualTime = moment().hour();
+        var actualTime = 11;
         var inputHours = $(".time-block");
         
+        //loop through the textfield elements
         for (var i = 0; i < inputHours.length; i++){
+            //give each element attribute "data-hour"
             var thisHour = $(inputHours[i])
+            //index by respective number on 24-hour clock
             var hourIndex = i+9;
             $(thisHour).attr("data-hour", hourIndex);
+            //apply the past/present/future classes
             if (hourIndex > actualTime) {
                 $(thisHour).addClass("past");
             }
