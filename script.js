@@ -53,40 +53,12 @@ $(document).ready(function(){
 
     function renderHourValues(){
         var hourContainer = $(".container").children();
-        // console.log(hourContainer);
-        // loop through hour elements
-        // local storage get data corresponding to key that
-        //   matches data-hour attribute
         var storedValuesObj = localStorage;
-        // loop through hour
-        for (var i = 9; i <= 16; i++){
-            var thisHour = $(hourContainer[i-9]);
-            var thisHourIndex = parseInt($(hourContainer[i-9]).attr("data-hour"));
-            console.log(thisHour);
-            console.log(thisHourIndex);
-            $(thisHour)
-            // console.log(typeof(thisHourIndex));
+        // loop through hour elements
+        for (var i = 0; i < hourContainer.length; i++){
+            var thisHourInput = $(hourContainer[i]).children()[1];
+            var thisHourlyIndex = parseInt($(hourContainer[i]).attr("data-hour"));
+            $(thisHourInput).val(localStorage.getItem(thisHourlyIndex));
         }
     }
-
-    /**
-     * To Dos:
-     *    Get hour
-     *    Determine which colors display based on hour
-     *        Loop through the time/input divs
-     *        assign attribute data-hour equal to hour in 24-hr time format
-     *        compare each data-hour to current hour
-     *        < = past // === = present // > = future 
-     *    Display the colors:
-     *        set attribute "class" to .past/.present/.future
-     *    Save input data to local storage
-     *        get value of input box
-     *        get value of hour-index
-     *        local storage set (hourIndex, inputVal) 
-     *    Render box values
-     *        do this any time the page is loaded
-     *        or any time a save button is clicked
-     *        loop through local storage
-     *        set hour input values to corresponding saved data 
-     */
 });
