@@ -17,8 +17,7 @@ $(document).ready(function(){
     $("#currentDay").text(moment());
 
     function setColors(){
-        // var actualTime = moment().hour();
-        var actualTime = 11;
+        var actualTime = moment().hour();
         var inputHours = $(".time-block");
         
         //loop through the textfield elements
@@ -44,7 +43,31 @@ $(document).ready(function(){
     setColors();
     colorTimer = setTimeout(setColors, 60000);
 
-    
+    $(".saveBtn").on("click", function(){
+        var hour = $(this).parent().attr("data-hour");    
+        var hourElChildren = $(this).parent().children();
+        var hourText = $(hourElChildren[1]).val();
+        localStorage.setItem(hour, hourText);
+        renderHourValues();
+    });
+
+    function renderHourValues(){
+        var hourContainer = $(".container").children();
+        // console.log(hourContainer);
+        // loop through hour elements
+        // local storage get data corresponding to key that
+        //   matches data-hour attribute
+        var storedValuesObj = localStorage;
+        // loop through hour
+        for (var i = 9; i <= 16; i++){
+            var thisHour = $(hourContainer[i-9]);
+            var thisHourIndex = parseInt($(hourContainer[i-9]).attr("data-hour"));
+            console.log(thisHour);
+            console.log(thisHourIndex);
+            $(thisHour)
+            // console.log(typeof(thisHourIndex));
+        }
+    }
 
     /**
      * To Dos:
@@ -56,7 +79,14 @@ $(document).ready(function(){
      *        < = past // === = present // > = future 
      *    Display the colors:
      *        set attribute "class" to .past/.present/.future
-     *         
-     *         
+     *    Save input data to local storage
+     *        get value of input box
+     *        get value of hour-index
+     *        local storage set (hourIndex, inputVal) 
+     *    Render box values
+     *        do this any time the page is loaded
+     *        or any time a save button is clicked
+     *        loop through local storage
+     *        set hour input values to corresponding saved data 
      */
 });
